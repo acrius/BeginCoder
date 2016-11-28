@@ -1,20 +1,17 @@
 import React, { Component } from 'react'
-import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router'
-import { BaseLayout } from '../../layouts/BaseLayout'
-import List from '../List'
-import Post from '../Post'
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem  } from 'react-bootstrap'
+import { Header } from '../Header'
 
 class App extends Component {
-  render(){
-    return (
-      <Router history={ browserHistory }>
-        <Route path="/" component={ BaseLayout }>
-          <IndexRoute component={ List } />
-          <Route path=":post_id" component={ Post } />
-        </Route>
-      </Router>
-    );
-  }
+    render() {
+        return (
+            <div>
+                <Header />
+                { this.props.children }
+                <footer>acrius 2016</footer>
+            </div>
+        );
+    }
 }
 
 export default App

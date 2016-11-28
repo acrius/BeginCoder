@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
-import { format_date } from "../../utils"
 
 class Post extends Component {
   state = {
@@ -27,7 +26,6 @@ class Post extends Component {
     return(
       <div>
         <h4>{ title }</h4>
-        <p>{ fromat_date(date) }</p>
         <article dangerouslySetInnerHTML={{__html: text}}/>
         <Link to="/">All posts</Link>
       </div>
