@@ -9,7 +9,7 @@ module.exports = {
     },
     resolve: {
         extensions: [
-            '', '.js', 'jsx', '.scss'
+            '', '.js', 'jsx', '.scss', '.styl'
         ],
         modulesDirectories: ['node_modules']
     },
