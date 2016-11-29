@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Grid, Row} from 'react-bootstrap'
 
 class PostlList extends Component {
 
@@ -18,6 +19,11 @@ class PostlList extends Component {
 
     render() {
         return (
+            <Grid>
+                <Row>
+                    
+                </Row>
+            </Grid>
             <ul>
                 {this.state.posts.map((post, index) => (
                     <li>{ post.title }</li>
