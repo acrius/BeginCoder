@@ -21,7 +21,7 @@ class ContentPostList extends Component {
         return (
             <Grid>
                 <Row>
-                    <Postlist posts={this.state.posts}/>
+                    <PostList posts={this.state.posts}/>
                 </Row>
             </Grid>
         );

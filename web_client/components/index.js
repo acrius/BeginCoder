@@ -1,3 +1,2 @@
 export { default as App } from './App'
-export { default as PostList } from './PostList'
-export { default as Post } from './Post'
+export {ContentPostList, ContentPost} from './Content'

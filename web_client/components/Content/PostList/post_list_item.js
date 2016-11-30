@@ -8,7 +8,7 @@ class PostListItemFooter extends Component {
         <Row>
             <Col md={2}>{this.props.date}</Col>
             <Col md={8}></Col>
-            <Col md={2}><Link to={`/${thia.props.id}`}>Читать дальше</Link></Col>
+            <Col md={2}><Link to={`/${this.props.post_id}`}>Читать дальше</Link></Col>
         </Row>
     }
 }
@@ -22,8 +22,10 @@ class PostListItem extends Component {
                     <h2>{this.props.post.title}</h2>
                 </Row>
                 <Row dangerouslySetInnerHTML={{__html: content}}></Row>
-                <PostListItemFooter />
+                <PostListItemFooter date={this.props.date} post_id={this.props.id} />
             </Row>
         );
     }
 }
+
+export default PostListItem
