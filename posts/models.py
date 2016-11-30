@@ -12,4 +12,5 @@ class Post(models.Model):
     date = models.DateTimeField(default=timezone.now)
     tags = models.TextField(max_length=1000, default='#programming')
     content = models.TextField(null=True, blank=True)
+    views_count = models.IntegerField(default=0)
     author = models.ForeignKey(User)

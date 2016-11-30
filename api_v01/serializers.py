@@ -13,4 +13,4 @@ class PostSerializer(ModelSerializer):
         tags = validated_data.get('tags')
         author = self.context.get('user')
         content = validated_data.get('content')
-        return Post.objects.create(title=title, date=date, tags=tags, author=author, content=content)
+        return Post.objects.create(title=title, date=date, tags=tags, author=author, content=content, views_count=0)

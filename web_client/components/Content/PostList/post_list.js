@@ -1,13 +1,13 @@
 import React, {Component} from 'react'
 import {Col} from 'react-bootstrap'
-import PostItem from './PostListItem.js'
+import PostListItem from './post_list_item.js'
 
 class PostList extends Component {
     render() {
         return (
             <Col md={9}>
-                {this.param.posts.map((post, index) => (
-
+                {this.props.posts.map((post, index) =>(
+                    <PostListItem post={post} />
                 ))}
             </Col>
         );

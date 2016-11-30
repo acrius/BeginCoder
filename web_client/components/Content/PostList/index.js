@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import {Grid, Row} from 'react-bootstrap'
+import PostList from './post_list.js'
 
-class PostlList extends Component {
-
+class ContentPostList extends Component {
     state = {
         posts: []
     };
@@ -21,16 +21,11 @@ class PostlList extends Component {
         return (
             <Grid>
                 <Row>
-                    
+                    <Postlist posts={this.state.posts}/>
                 </Row>
             </Grid>
-            <ul>
-                {this.state.posts.map((post, index) => (
-                    <li>{ post.title }</li>
-                ))}
-            </ul>
         );
     }
 }
 
-export default PostlList
+export default ContentPostList
