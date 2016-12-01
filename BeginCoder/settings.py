@@ -118,7 +118,7 @@ USE_L10N = True
 USE_TZ = True
 
 REST_FRAMEWORK = {
-    'PAGE_SIZE': 1
+    'PAGE_SIZE': 10
 }
 
 

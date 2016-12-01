@@ -5,7 +5,9 @@ from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 
 from posts.models import Post
-from api_v01.serializers import PostSerializer
+from api_v01.serializers import PostSerializer, PaginatedCourseSerializer
+
+POSTS_PER_PAGE = 10
 
 class PostList(ListCreateAPIView):
     queryset = Post.objects.all()
@@ -13,7 +15,7 @@ class PostList(ListCreateAPIView):
 
     def get(self, request, format=None):
         posts = Post.objects.all().order_by('-date')
-        posts_serializer = PostSerializer(posts, many=True)
+        posts_serializer = PaginatedCourseSerializer(posts, request, POSTS_PER_PAGE)
         return Response(posts_serializer.data)
 
     @permission_classes((IsAdminUser,))
