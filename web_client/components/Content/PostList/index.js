@@ -8,8 +8,9 @@ class ContentPostList extends Component {
     };
 
     async load_posts() {
+        const data = await fetch('/api/v01/posts/').then(response => response.json());
         this.setState({
-            posts: await fetch('/api/v01/posts/').then(response => response.json())
+            posts: data.courses
         });
     }
 
@@ -21,7 +22,7 @@ class ContentPostList extends Component {
         return (
             <Grid>
                 <Row>
-                    <PostList posts={this.state.posts.courses}/>
+                    <PostList posts={this.state.posts}/>
                 </Row>
             </Grid>
         );

@@ -6,8 +6,8 @@ class PostList extends Component {
     render() {
         return (
             <Col md={9}>
-                {this.props.posts.map((post, index) =>(
-                    <PostListItem post={post} />
+                {this.props.posts.map((post, index) => (
+                    <PostListItem post_item={post} key={index}/>
                 ))}
             </Col>
         );

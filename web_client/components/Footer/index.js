@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router'
+import {LinkContainer} from 'react-router-bootstrap'
 import {Navbar, Nav, NavItem} from 'react-bootstrap'
 
 class Footer extends Component {
@@ -7,9 +7,9 @@ class Footer extends Component {
         return (
             <Navbar fixedBottom>
                 <Nav pullRight>
-                    <NavItem>
-                        <Link to='/about'>О нас</Link>
-                    </NavItem>
+                    <LinkContainer to='/about'>
+                        <NavItem eventKey={1}>О нас</NavItem>
+                    </LinkContainer>
                 </Nav>
             </Navbar>
         );

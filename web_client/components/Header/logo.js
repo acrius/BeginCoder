@@ -1,15 +1,12 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router'
+import {LinkContainer} from 'react-router-bootstrap'
 import {Navbar} from 'react-bootstrap'
 
 class Logo extends Component {
     render() {
         return (
             <Navbar.Header>
-                <Navbar.Brand>
-                    <Link to='/'>__bc__</Link>
-                </Navbar.Brand>
-                <Navbar.Toggle/>
+                <Navbar.Brand>__bc__</Navbar.Brand>
             </Navbar.Header>
         );
     }
