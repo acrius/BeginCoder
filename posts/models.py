@@ -1,7 +1,8 @@
 from django.utils import timezone
-
 from django.db import models
 from django.contrib.auth.models import User
+from taggit.managers import TaggableManager
+
 
 class Post(models.Model):
     class Meta:
@@ -10,7 +11,7 @@ class Post(models.Model):
 
     title = models.CharField(max_length=255, unique=True, default='Title of post.')
     date = models.DateTimeField(default=timezone.now)
-    tags = models.TextField(max_length=1000, default='#programming')
     content = models.TextField(null=True, blank=True)
     views_count = models.IntegerField(default=0)
     author = models.ForeignKey(User)
+    tags = TaggableManager()

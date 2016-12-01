@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'posts',
     'main',
-    'api_v01'
+    'api_v01',
+    'taggit'
 ]
 
 MIDDLEWARE = [
@@ -126,3 +127,5 @@ REST_FRAMEWORK = {
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+TAGGIT_CASE_INSENSITIVE = True

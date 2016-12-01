@@ -13,8 +13,11 @@ class PostList(ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
-    def get(self, request, format=None):
-        posts = Post.objects.all().order_by('-date')
+    def get(self, request):
+        oreder_by = request.GET.get('order_by') or '-date'
+        print(request.GET)
+        print(oreder_by)
+        posts = Post.objects.all().order_by(oreder_by)
         posts_serializer = PaginatedCourseSerializer(posts, request, POSTS_PER_PAGE)
         return Response(posts_serializer.data)
 
