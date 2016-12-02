@@ -1,2 +1,4 @@
 Django==1.10.3
 djangorestframework==3.5.3
+django-taggit==0.21.3
+django-taggit-serializer==0.1.5

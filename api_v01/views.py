@@ -15,9 +15,9 @@ class PostList(ListCreateAPIView):
 
     def get(self, request):
         oreder_by = request.GET.get('order_by') or '-date'
-        print(request.GET)
-        print(oreder_by)
-        posts = Post.objects.all().order_by(oreder_by)
+        filter_by = request.GET.get('filter_by')
+        posts = Post.objects.all().filter(tags__name__in=filter_by).order_by(oreder_by) if filter_by\
+                else Post.objects.all().order_by(oreder_by)
         posts_serializer = PaginatedCourseSerializer(posts, request, POSTS_PER_PAGE)
         return Response(posts_serializer.data)
 
