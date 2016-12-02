@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'posts',
     'main',
     'api_v01',
-    'taggit'
+    'taggit',
+    'taggit_serializer'
 ]
 
 MIDDLEWARE = [

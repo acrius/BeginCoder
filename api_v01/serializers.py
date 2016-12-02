@@ -1,5 +1,6 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from rest_framework.serializers import ModelSerializer
+from taggit_serializer.serializers import TaggitSerializer, TagListSerializerField
 
 from posts.models import Post
 
@@ -33,3 +34,9 @@ class PostSerializer(ModelSerializer):
         author = self.context.get('user')
         content = validated_data.get('content')
         return Post.objects.create(title=title, date=date, tags=tags, author=author, content=content, views_count=0)
+
+class PostTagsSerializer(TaggitSerializer, ModelSerializer):
+    tags = TagListSerializerField()
+
+    class Meta:
+        models = Post

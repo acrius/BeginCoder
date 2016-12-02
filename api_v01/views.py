@@ -1,11 +1,12 @@
 from rest_framework import status
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListCreateAPIView, ListAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
+from taggit.models import TaggedItem
 
 from posts.models import Post
-from api_v01.serializers import PostSerializer, PaginatedCourseSerializer
+from api_v01.serializers import PostSerializer, PaginatedCourseSerializer, PostTagsSerializer
 
 POSTS_PER_PAGE = 10
 
@@ -35,3 +36,6 @@ class PostList(ListCreateAPIView):
 class PostDetail(RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+class PostTagList(ListAPIView):
+    queryset = Tag.objects.all()
