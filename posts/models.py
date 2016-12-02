@@ -13,5 +13,6 @@ class Post(models.Model):
     date = models.DateTimeField(default=timezone.now)
     content = models.TextField(null=True, blank=True)
     views_count = models.IntegerField(default=0)
+    useful = models.IntegerField(default=0)
     author = models.ForeignKey(User)
     tags = TaggableManager()
