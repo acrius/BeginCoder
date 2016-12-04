@@ -1,12 +1,13 @@
+from django.db.models import Count
+from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.generics import ListCreateAPIView, ListAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
-from taggit.models import TaggedItem
 
-from posts.models import Post
-from api_v01.serializers import PostSerializer, PaginatedCourseSerializer, PostTagsSerializer
+from posts.models import Post, PostTag
+from api_v01.serializers import PostSerializer, PaginatedCourseSerializer
 
 POSTS_PER_PAGE = 10
 
@@ -15,10 +16,11 @@ class PostList(ListCreateAPIView):
     serializer_class = PostSerializer
 
     def get(self, request):
-        oreder_by = request.GET.get('order_by') or '-date'
-        filter_by = request.GET.get('filter_by')
+        oreder_by = request.GET.get('sort') or '-date'
+        filter_by = request.GET.get('filter')
         posts = Post.objects.all().filter(tags__name__in=filter_by).order_by(oreder_by) if filter_by\
                 else Post.objects.all().order_by(oreder_by)
+
         posts_serializer = PaginatedCourseSerializer(posts, request, POSTS_PER_PAGE)
         return Response(posts_serializer.data)
 
@@ -37,5 +39,13 @@ class PostDetail(RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
-class PostTagList(ListAPIView):
-    queryset = Tag.objects.all()
+def get_tags(request):
+    tags = PostTag.objects.extra(where=['using > 0',])
+    tags = [{'name': tag.name, 'count': tag.using} for tag in tags]
+    return JsonResponse(tags, safe=False)
+
+def get_sorts(request):
+    sortings = [{'sorting': '-date', 'name': 'Дата публикации'},
+             {'sorting': 'views', 'name': 'Просмотры'},
+             {'sorting': 'useful', 'name': 'Полезность'}]
+    return JsonResponse(sortings, safe=False)

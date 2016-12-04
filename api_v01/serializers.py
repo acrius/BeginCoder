@@ -22,10 +22,12 @@ class PaginatedCourseSerializer:
         self.data = {'count': count, 'previous': previous,
                      'next': next, 'courses': serializer.data}
 
-class PostSerializer(ModelSerializer):
+class PostSerializer(TaggitSerializer, ModelSerializer):
+    tags = TagListSerializerField()
+
     class Meta:
         model = Post
-        fields = ['id', 'title', 'date', 'tags', 'content', 'views_count']
+        fields = ['id', 'title', 'date', 'content', 'views_count', 'tags']
 
     def create(self, validated_data):
         title = validated_data.get('title')
@@ -34,9 +36,3 @@ class PostSerializer(ModelSerializer):
         author = self.context.get('user')
         content = validated_data.get('content')
         return Post.objects.create(title=title, date=date, tags=tags, author=author, content=content, views_count=0)
-
-class PostTagsSerializer(TaggitSerializer, ModelSerializer):
-    tags = TagListSerializerField()
-
-    class Meta:
-        models = Post

@@ -12,15 +12,15 @@ class ContentPostList extends Component {
 
     async load_posts() {
         const query_string = '/api/v01/posts/';
-        const query_options_string = get_params_string();
-        const data = await fetch(query_string + params_string).then(response => response.json());
+        const query_options_string = this.get_params_string();
+        const data = await fetch(query_string + query_options_string).then(response => response.json());
         this.setState({
             posts: data.courses
         });
     }
 
     get_params_string() {
-        const sort_string = '/?sort=' + this.state.sort;
+        const sort_string = '?sort=' + this.state.sort;
         const filter_string = this.state.filters.length > 0 ? '&filter=' + this.state.filters.join('&filter=') : '';
         return sort_string + filter_string;
     }
@@ -42,7 +42,7 @@ class ContentPostList extends Component {
             <Grid>
                 <Row>
                     <PostList posts={this.state.posts}/>
-                    <AuxPanel set_query_options=this.set_query_options />
+                    <AuxPanel set_query_options={this.set_query_options} />
                 </Row>
             </Grid>
         );

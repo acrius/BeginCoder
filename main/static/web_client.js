@@ -46171,7 +46171,7 @@
 	  }
 	});
 
-	var _Post = __webpack_require__(636);
+	var _Post = __webpack_require__(637);
 
 	Object.defineProperty(exports, 'ContentPost', {
 	  enumerable: true,
@@ -46230,6 +46230,10 @@
 
 	var _post_list2 = _interopRequireDefault(_post_list);
 
+	var _aux_panel = __webpack_require__(636);
+
+	var _aux_panel2 = _interopRequireDefault(_aux_panel);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var ContentPostList = function (_Component) {
@@ -46247,7 +46251,9 @@
 	        }
 
 	        return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = ContentPostList.__proto__ || (0, _getPrototypeOf2.default)(ContentPostList)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-	            posts: []
+	            posts: [],
+	            sort: '-date',
+	            filters: []
 	        }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
 	    }
 
@@ -46255,24 +46261,26 @@
 	        key: 'load_posts',
 	        value: function () {
 	            var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee() {
-	                var data;
+	                var query_string, query_options_string, data;
 	                return _regenerator2.default.wrap(function _callee$(_context) {
 	                    while (1) {
 	                        switch (_context.prev = _context.next) {
 	                            case 0:
-	                                _context.next = 2;
-	                                return fetch('/api/v01/posts/').then(function (response) {
+	                                query_string = '/api/v01/posts/';
+	                                query_options_string = this.get_params_string();
+	                                _context.next = 4;
+	                                return fetch(query_string + query_options_string).then(function (response) {
 	                                    return response.json();
 	                                });
 
-	                            case 2:
+	                            case 4:
 	                                data = _context.sent;
 
 	                                this.setState({
 	                                    posts: data.courses
 	                                });
 
-	                            case 4:
+	                            case 6:
 	                            case 'end':
 	                                return _context.stop();
 	                        }
@@ -46287,6 +46295,22 @@
 	            return load_posts;
 	        }()
 	    }, {
+	        key: 'get_params_string',
+	        value: function get_params_string() {
+	            var sort_string = '?sort=' + this.state.sort;
+	            var filter_string = this.state.filters.length > 0 ? '&filter=' + this.state.filters.join('&filter=') : '';
+	            return sort_string + filter_string;
+	        }
+	    }, {
+	        key: 'set_query_options',
+	        value: function set_query_options(sorts, filters) {
+	            this.setState({
+	                sorts: sorts,
+	                filters: filters
+	            });
+	            this.load_posts();
+	        }
+	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            this.load_posts();
@@ -46300,7 +46324,8 @@
 	                _react2.default.createElement(
 	                    _reactBootstrap.Row,
 	                    null,
-	                    _react2.default.createElement(_post_list2.default, { posts: this.state.posts })
+	                    _react2.default.createElement(_post_list2.default, { posts: this.state.posts }),
+	                    _react2.default.createElement(_aux_panel2.default, { set_query_options: this.set_query_options })
 	                )
 	            );
 	        }
@@ -64055,6 +64080,258 @@
 
 /***/ },
 /* 636 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _regenerator = __webpack_require__(506);
+
+	var _regenerator2 = _interopRequireDefault(_regenerator);
+
+	var _asyncToGenerator2 = __webpack_require__(509);
+
+	var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+	var _getPrototypeOf = __webpack_require__(235);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(261);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(262);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(266);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(313);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactBootstrap = __webpack_require__(321);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var AuxPanelFilter = function (_Component) {
+	    (0, _inherits3.default)(AuxPanelFilter, _Component);
+
+	    function AuxPanelFilter() {
+	        (0, _classCallCheck3.default)(this, AuxPanelFilter);
+	        return (0, _possibleConstructorReturn3.default)(this, (AuxPanelFilter.__proto__ || (0, _getPrototypeOf2.default)(AuxPanelFilter)).apply(this, arguments));
+	    }
+
+	    (0, _createClass3.default)(AuxPanelFilter, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'h3',
+	                    null,
+	                    '\u041F\u043E\u043F\u0443\u043B\u044F\u0440\u043D\u044B\u0435 \u0442\u044D\u0433\u0438:'
+	                ),
+	                _react2.default.createElement(
+	                    'ul',
+	                    null,
+	                    this.props.filters.map(function (filter, index) {
+	                        return _react2.default.createElement(
+	                            'li',
+	                            { key: index },
+	                            _react2.default.createElement(
+	                                'b',
+	                                null,
+	                                filter.tag
+	                            ),
+	                            _react2.default.createElement(
+	                                'b',
+	                                null,
+	                                '(',
+	                                filter.count,
+	                                ')'
+	                            )
+	                        );
+	                    })
+	                )
+	            );
+	        }
+	    }]);
+	    return AuxPanelFilter;
+	}(_react.Component);
+
+	var AuxPanelSort = function (_Component2) {
+	    (0, _inherits3.default)(AuxPanelSort, _Component2);
+
+	    function AuxPanelSort(props) {
+	        (0, _classCallCheck3.default)(this, AuxPanelSort);
+
+	        var _this2 = (0, _possibleConstructorReturn3.default)(this, (AuxPanelSort.__proto__ || (0, _getPrototypeOf2.default)(AuxPanelSort)).call(this, props));
+
+	        _this2.state = {
+	            select_sorting: ''
+	        };
+	        return _this2;
+	    }
+
+	    (0, _createClass3.default)(AuxPanelSort, [{
+	        key: 'select_sorting',
+	        value: function select_sorting(e) {
+	            this.setState({ select_sorting: e.currentTarget.getAttribute('data-value') });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _this3 = this;
+
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'h3',
+	                    null,
+	                    '\u0421\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u043F\u043E:'
+	                ),
+	                _react2.default.createElement(
+	                    'ul',
+	                    null,
+	                    this.props.sortings.map(function (sorting, index) {
+	                        return _react2.default.createElement(
+	                            'li',
+	                            { 'data-value': sorting.sorting, onClick: _this3.select_sorting, key: index },
+	                            sorting.name
+	                        );
+	                    })
+	                )
+	            );
+	        }
+	    }]);
+	    return AuxPanelSort;
+	}(_react.Component);
+
+	var AuxPanel = function (_Component3) {
+	    (0, _inherits3.default)(AuxPanel, _Component3);
+
+	    function AuxPanel(props) {
+	        (0, _classCallCheck3.default)(this, AuxPanel);
+
+	        var _this4 = (0, _possibleConstructorReturn3.default)(this, (AuxPanel.__proto__ || (0, _getPrototypeOf2.default)(AuxPanel)).call(this, props));
+
+	        _this4.state = {
+	            sort_by: '-date',
+	            filter_by: [],
+	            sortings: [],
+	            filters: []
+	        };
+	        return _this4;
+	    }
+
+	    (0, _createClass3.default)(AuxPanel, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            this.get_filters();
+	            this.get_sorts();
+	        }
+	    }, {
+	        key: 'get_filters',
+	        value: function () {
+	            var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee() {
+	                var filters;
+	                return _regenerator2.default.wrap(function _callee$(_context) {
+	                    while (1) {
+	                        switch (_context.prev = _context.next) {
+	                            case 0:
+	                                _context.next = 2;
+	                                return fetch('/api/v01/tags/').then(function (response) {
+	                                    return response.json();
+	                                });
+
+	                            case 2:
+	                                filters = _context.sent;
+
+	                                this.setState({ filters: filters });
+
+	                            case 4:
+	                            case 'end':
+	                                return _context.stop();
+	                        }
+	                    }
+	                }, _callee, this);
+	            }));
+
+	            function get_filters() {
+	                return _ref.apply(this, arguments);
+	            }
+
+	            return get_filters;
+	        }()
+	    }, {
+	        key: 'get_sorts',
+	        value: function () {
+	            var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2() {
+	                var sorts;
+	                return _regenerator2.default.wrap(function _callee2$(_context2) {
+	                    while (1) {
+	                        switch (_context2.prev = _context2.next) {
+	                            case 0:
+	                                _context2.next = 2;
+	                                return fetch('/api/v01/sorts/').then(function (response) {
+	                                    return response.json();
+	                                });
+
+	                            case 2:
+	                                sorts = _context2.sent;
+
+	                                this.setState({ sortings: sorts });
+
+	                            case 4:
+	                            case 'end':
+	                                return _context2.stop();
+	                        }
+	                    }
+	                }, _callee2, this);
+	            }));
+
+	            function get_sorts() {
+	                return _ref2.apply(this, arguments);
+	            }
+
+	            return get_sorts;
+	        }()
+	    }, {
+	        key: 'set_sort_by',
+	        value: function set_sort_by(sort_by) {
+	            this.setState({ sort_by: sort_by });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                _reactBootstrap.Col,
+	                { md: 3 },
+	                _react2.default.createElement(AuxPanelSort, { sortings: this.state.sortings, set_sort_by: this.set_sort_by }),
+	                _react2.default.createElement(AuxPanelFilter, { filters: this.state.filters })
+	            );
+	        }
+	    }]);
+	    return AuxPanel;
+	}(_react.Component);
+
+	exports.default = AuxPanel;
+
+/***/ },
+/* 637 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
