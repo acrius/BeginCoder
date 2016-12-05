@@ -23,3 +23,11 @@ class Post(models.Model):
     useful = models.IntegerField(default=0)
     author = models.ForeignKey(User)
     tags = TaggableManager(through=TaggedPost)
+
+class PostSorting(models.Model):
+    class Meta:
+        db_table = 'postsortings'
+        default_related_name = 'postsortings'
+
+    title = models.CharField(max_length=100, null=False, default='title')
+    sorting_string = models.CharField(max_length=100, null=False, default='field')

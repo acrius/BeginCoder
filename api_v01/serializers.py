@@ -2,7 +2,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from rest_framework.serializers import ModelSerializer
 from taggit_serializer.serializers import TaggitSerializer, TagListSerializerField
 
-from posts.models import Post
+from posts.models import Post, PostSorting
 
 class PaginatedCourseSerializer:
     def __init__(self, courses, request, per_page):
@@ -20,7 +20,7 @@ class PaginatedCourseSerializer:
         next = None if not courses.has_next() else courses.next_page_number()
         serializer = PostSerializer(courses, many=True)
         self.data = {'count': count, 'previous': previous,
-                     'next': next, 'courses': serializer.data}
+                     'next': next, 'results': serializer.data}
 
 class PostSerializer(TaggitSerializer, ModelSerializer):
     tags = TagListSerializerField()
@@ -36,3 +36,8 @@ class PostSerializer(TaggitSerializer, ModelSerializer):
         author = self.context.get('user')
         content = validated_data.get('content')
         return Post.objects.create(title=title, date=date, tags=tags, author=author, content=content, views_count=0)
+
+class PostSortingSerializer(ModelSerializer):
+    class Meta:
+        model = PostSorting
+        fields = ['title', 'sorting_string']

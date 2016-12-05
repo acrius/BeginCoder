@@ -2,15 +2,38 @@ import React, {Component} from 'react'
 import {Col, Row} from 'react-bootstrap'
 
 class AuxPanelFilter extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            select_filters: []
+        };
+    }
+
+    select_filter = (e) => {
+        this.update_filter(e.currentTarget.getAttribute('data-value'));
+    }
+
+    update_filter = (filter) => {
+        let filters = this.state.select_filters.slice();
+        const filter_index = filters.indexOf(filter);
+        if (filter_index >= 0) {
+            filters.splice(filter_index, 1);
+        } else {
+            filters.push(filter);
+        }
+        this.setState({select_filters: filters});
+        this.props.set_filter_by(filters);
+    }
+
     render() {
         return (
             <div>
                 <h3>Популярные тэги:</h3>
                 <ul>
                     {this.props.filters.map((filter, index) => (
-                        <li key={index}>
-                            <b>{filter.tag}</b>
-                            <b>({filter.count})</b>
+                        <li key={index} data-value={filter.name} onClick={this.select_filter}>
+                            <span>{filter.name}</span>
+                            <span>({filter.count})</span>
                         </li>
                     ))}
                 </ul>
@@ -27,9 +50,10 @@ class AuxPanelSort extends Component {
         };
     }
 
-    select_sorting(e) {
-        this.setState({select_sorting: e.currentTarget.getAttribute('data-value')});
-
+    select_sorting = (e) => {
+        const sorting = e.currentTarget.getAttribute('data-value');
+        this.setState({select_sorting: sorting});
+        this.props.set_sort_by(sorting);
     }
 
     render() {
@@ -38,7 +62,7 @@ class AuxPanelSort extends Component {
                 <h3>Сортировать по:</h3>
                 <ul>
                     {this.props.sortings.map((sorting, index) => (
-                        <li data-value={sorting.sorting} onClick={this.select_sorting} key={index}>{sorting.name}</li>
+                        <li data-value={sorting.sorting_string} onClick={this.select_sorting} key={index}>{sorting.title}</li>
                     ))}
                 </ul>
             </div>
@@ -47,8 +71,9 @@ class AuxPanelSort extends Component {
 }
 
 class AuxPanel extends Component {
-    constructor(props) {
-        super(props);
+    constructor(params) {
+        super(params);
+        console.log('Constructor');
         this.state = {
             sort_by: '-date',
             filter_by: [],
@@ -69,18 +94,31 @@ class AuxPanel extends Component {
 
     async get_sorts() {
         const sorts = await fetch('/api/v01/sorts/').then(response => response.json());
-        this.setState({sortings: sorts});
+        this.setState({sortings: sorts.results});
     }
 
-    set_sort_by(sort_by) {
-        this.setState({sort_by: sort_by});
+    set_sort_by = (sort_by) => {
+        this.update_query_param('sort_by', sort_by);
+    }
+
+    set_filter_by = (filter_by) => {
+        this.update_query_param('filter_by', filter_by);
+    }
+
+    update_query_param = (param_name, param) => {
+        let state = {}
+        state[param_name] = param
+        console.log(state);
+        this.setState(state, () => {
+            this.props.set_query_options(this.state.sort_by, this.state.filter_by);
+        });
     }
 
     render() {
         return (
             <Col md={3}>
                 <AuxPanelSort sortings={this.state.sortings} set_sort_by={this.set_sort_by}/>
-                <AuxPanelFilter filters={this.state.filters}/>
+                <AuxPanelFilter filters={this.state.filters} set_filter_by={this.set_filter_by}/>
             </Col>
         );
     }

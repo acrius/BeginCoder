@@ -1,15 +1,15 @@
 from django.db.models import Count
 from django.http import JsonResponse
 from rest_framework import status
-from rest_framework.generics import ListCreateAPIView, ListAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListCreateAPIView, ListAPIView, RetrieveAPIView
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 
-from posts.models import Post, PostTag
-from api_v01.serializers import PostSerializer, PaginatedCourseSerializer
+from posts.models import Post, PostTag, PostSorting
+from api_v01.serializers import PostSerializer, PaginatedCourseSerializer, PostSortingSerializer
 
-POSTS_PER_PAGE = 10
+POSTS_PER_PAGE = 7
 
 class PostList(ListCreateAPIView):
     queryset = Post.objects.all()
@@ -18,9 +18,9 @@ class PostList(ListCreateAPIView):
     def get(self, request):
         oreder_by = request.GET.get('sort') or '-date'
         filter_by = request.GET.get('filter')
-        posts = Post.objects.all().filter(tags__name__in=filter_by).order_by(oreder_by) if filter_by\
+        filter_by = filter_by.strip('[]').split(',') if filter_by else None
+        posts = Post.objects.all().filter(tags__name__in=filter_by) if filter_by\
                 else Post.objects.all().order_by(oreder_by)
-
         posts_serializer = PaginatedCourseSerializer(posts, request, POSTS_PER_PAGE)
         return Response(posts_serializer.data)
 
@@ -35,17 +35,15 @@ class PostList(ListCreateAPIView):
             response = Response(post_serializer.errors, status.HTTP_400_BAD_REQUEST)
         return response
 
-class PostDetail(RetrieveUpdateDestroyAPIView):
+class PostDetail(RetrieveAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
+class PostSortingList(ListAPIView):
+    queryset = PostSorting.objects.all()
+    serializer_class = PostSortingSerializer
+
 def get_tags(request):
-    tags = PostTag.objects.extra(where=['using > 0',])
+    tags = PostTag.objects.extra(where=['"using" > 0',], order_by=['-using',])
     tags = [{'name': tag.name, 'count': tag.using} for tag in tags]
     return JsonResponse(tags, safe=False)
-
-def get_sorts(request):
-    sortings = [{'sorting': '-date', 'name': 'Дата публикации'},
-             {'sorting': 'views', 'name': 'Просмотры'},
-             {'sorting': 'useful', 'name': 'Полезность'}]
-    return JsonResponse(sortings, safe=False)
