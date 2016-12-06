@@ -47803,6 +47803,7 @@
 	    (0, _createClass3.default)(PostListItemFooter, [{
 	        key: 'render',
 	        value: function render() {
+	            console.log(this.props.post_id);
 	            return _react2.default.createElement(
 	                _reactBootstrap.Row,
 	                null,
@@ -64351,7 +64352,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 
 	var _getPrototypeOf = __webpack_require__(235);
@@ -64380,71 +64381,195 @@
 
 	var _reactRouter = __webpack_require__(178);
 
+	var _reactBootstrap = __webpack_require__(321);
+
+	var _post = __webpack_require__(637);
+
+	var _post2 = _interopRequireDefault(_post);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Post = function (_Component) {
-	  (0, _inherits3.default)(Post, _Component);
+	var ContentPost = function (_Component) {
+	    (0, _inherits3.default)(ContentPost, _Component);
 
-	  function Post() {
-	    var _ref;
+	    function ContentPost(props) {
+	        (0, _classCallCheck3.default)(this, ContentPost);
 
-	    var _temp, _this, _ret;
+	        var _this = (0, _possibleConstructorReturn3.default)(this, (ContentPost.__proto__ || (0, _getPrototypeOf2.default)(ContentPost)).call(this, props));
 
-	    (0, _classCallCheck3.default)(this, Post);
-
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
+	        _this.state = {
+	            post: {}
+	        };
+	        return _this;
 	    }
 
-	    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = Post.__proto__ || (0, _getPrototypeOf2.default)(Post)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-	      title: '',
-	      date: '',
-	      text: ''
-	    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
-	  }
+	    (0, _createClass3.default)(ContentPost, [{
+	        key: 'loadPost',
+	        value: function loadPost(post_id) {
+	            var _this2 = this;
 
-	  (0, _createClass3.default)(Post, [{
-	    key: 'loadPost',
-	    value: function loadPost(post_id) {
-	      var _this2 = this;
+	            fetch('/api/v01/posts/${post_id}/').then(function (response) {
+	                return response.json();
+	            }).then(function (data) {
+	                return _this2.setState({ post: data });
+	            });
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            this.loadPost(this.props.params['post_id']);
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _state = this.state,
+	                title = _state.title,
+	                date = _state.date,
+	                text = _state.text;
 
-	      fetch('/api_v01/posts/${post_id}/').then(function (response) {
-	        return response.json();
-	      }).then(function (data) {
-	        _this2.setState(data);
-	      });
-	    }
-	  }, {
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      this.loadPost(this.props.params['post_id']);
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _state = this.state,
-	          title = _state.title,
-	          date = _state.date,
-	          text = _state.text;
+	            return _react2.default.createElement(
+	                _reactBootstrap.Row,
+	                null,
+	                _react2.default.createElement(_post2.default, { post: this.state.post })
+	            );
+	        }
+	    }]);
+	    return ContentPost;
+	}(_react.Component);
 
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'h4',
-	          null,
-	          title
-	        ),
-	        _react2.default.createElement('article', { dangerouslySetInnerHTML: { __html: text } }),
-	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/' },
-	          'All posts'
-	        )
-	      );
+	exports.default = ContentPost;
+
+/***/ },
+/* 637 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _getPrototypeOf = __webpack_require__(235);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(261);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(262);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(266);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(313);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactBootstrap = __webpack_require__(321);
+
+	var _marked = __webpack_require__(523);
+
+	var _marked2 = _interopRequireDefault(_marked);
+
+	var _moment = __webpack_require__(524);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	__webpack_require__(606);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var PostFooter = function (_Component) {
+	    (0, _inherits3.default)(PostFooter, _Component);
+
+	    function PostFooter() {
+	        (0, _classCallCheck3.default)(this, PostFooter);
+	        return (0, _possibleConstructorReturn3.default)(this, (PostFooter.__proto__ || (0, _getPrototypeOf2.default)(PostFooter)).apply(this, arguments));
 	    }
-	  }]);
-	  return Post;
+
+	    (0, _createClass3.default)(PostFooter, [{
+	        key: 'render',
+	        value: function render() {
+	            return React.createElement(
+	                _reactBootstrap.Row,
+	                null,
+	                React.createElement(
+	                    _reactBootstrap.Col,
+	                    { md: 2 },
+	                    (0, _moment2.default)(this.props.date).format('L')
+	                ),
+	                React.createElement(_reactBootstrap.Col, { md: 8 }),
+	                React.createElement(
+	                    _reactBootstrap.Col,
+	                    { md: 2 },
+	                    React.createElement(
+	                        Link,
+	                        { to: '/' + this.props.post_id },
+	                        '\u0427\u0438\u0442\u0430\u0442\u044C \u0434\u0430\u043B\u044C\u0448\u0435'
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+	    return PostFooter;
+	}(_react.Component);
+
+	var Post = function (_Component2) {
+	    (0, _inherits3.default)(Post, _Component2);
+
+	    function Post(props) {
+	        (0, _classCallCheck3.default)(this, Post);
+
+	        var _this2 = (0, _possibleConstructorReturn3.default)(this, (Post.__proto__ || (0, _getPrototypeOf2.default)(Post)).call(this, props));
+
+	        _this2.state = {
+	            id: null,
+	            title: '',
+	            content: '',
+	            date: null
+
+	        };
+	        if (props.post) {
+	            _this2.setState({ id: _this2.props.post.id,
+	                title: _this2.props.post.title,
+	                content: _this2.props.post.content,
+	                date: _this2.props.post.date });
+	        }
+	        return _this2;
+	    }
+
+	    (0, _createClass3.default)(Post, [{
+	        key: 'render',
+	        value: function render() {
+	            var content = (0, _marked2.default)(this.state.content);
+	            return React.createElement(
+	                _reactBootstrap.Col,
+	                { md: 9 },
+	                React.createElement(
+	                    _reactBootstrap.Row,
+	                    null,
+	                    React.createElement(
+	                        'h2',
+	                        null,
+	                        'this.state.title'
+	                    )
+	                ),
+	                React.createElement(_reactBootstrap.Row, { dangerouslySetInnerHTML: {
+	                        __html: content
+	                    } }),
+	                React.createElement(PostFooter, { date: this.state.date, post_id: this.state.id })
+	            );
+	        }
+	    }]);
+	    return Post;
 	}(_react.Component);
 
 	exports.default = Post;

@@ -1,36 +1,34 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router'
+import React, {Component} from 'react'
+import {Link} from 'react-router'
+import {Row} from 'react-bootstrap'
 
-class Post extends Component {
-  state = {
-    title: '',
-    date: '',
-    text: ''
-  };
+import Post from './post.js'
 
+class ContentPost extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            post: {}
+        };
+    }
 
-  loadPost(post_id) {
-    fetch('/api_v01/posts/${post_id}/')
-          .then(response => response.json())
-          .then(data => {
-            this.setState(data)
-          });
-  }
+    loadPost(post_id) {
+        fetch('/api/v01/posts/${post_id}/').then(response => response.json())
+                                           .then(data => this.setState({post: data}));
+    }
 
-  componentDidMount() {
-    this.loadPost(this.props.params['post_id']);
-  }
+    componentDidMount() {
+        this.loadPost(this.props.params['post_id']);
+    }
 
-  render() {
-    const { title, date, text } = this.state;
-    return(
-      <div>
-        <h4>{ title }</h4>
-        <article dangerouslySetInnerHTML={{__html: text}}/>
-        <Link to="/">All posts</Link>
-      </div>
-    );
-  }
+    render() {
+        const {title, date, text} = this.state;
+        return (
+            <Row>
+                <Post post={this.state.post}/>
+            </Row>
+        );
+    }
 }
 
-export default Post
+export default ContentPost

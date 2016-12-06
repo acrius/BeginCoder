@@ -7,6 +7,7 @@ import 'moment/locale/ru'
 
 class PostListItemFooter extends Component {
     render() {
+        console.log(this.props.post_id);
         return (
             <Row>
                 <Col md={2}>{moment(this.props.date).format('L')}</Col>
