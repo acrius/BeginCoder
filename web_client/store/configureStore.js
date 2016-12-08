@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from 'redux'
-import rootReducer from '../reducers/posts.js'
+import rootReducer from '../reducers/PostsReducers.js'
 import thunk from 'redux-thunk'
 
 export default (initialState) => {

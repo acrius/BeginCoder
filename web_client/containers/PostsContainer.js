@@ -2,22 +2,23 @@ import React, { Component } from 'react'
 import {bindActionCreators} from 'redux'
 import {Grid, Row} from 'react-bootstrap'
 import {connect} from 'react-redux'
-import * as postsActions from '../actions/posts.js'
+
+import * as postsActions from '../actions/PostsActions.js'
 
 import PostList from '../components/Content/PostList/post_list.js'
 
 class Posts extends Component {
     componentDidMount() {
-        
+        this.props.postsActions.getPosts();
     }
 
     render() {
-        const postsData= this.props.posts;
+        const postsData = this.props.posts;
         const getPosts = this.props.postsActions.getPosts;
         return (
             <Grid>
                 <Row>
-                    <PostList posts={postsData.posts} fetching={postsData.fetching} />
+                    <PostList posts={postsData.posts} fetching={this.props.postsFetching} />
                 </Row>
             </Grid>
         );
@@ -27,6 +28,7 @@ class Posts extends Component {
 function mapStateToProps(state) {
     return {
         posts: state.posts,
+        postsFetching: state.postsFetching,
         filters: state.filters,
         sortings: state.sortings
     };

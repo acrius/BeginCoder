@@ -4,6 +4,8 @@ import PostListItem from './post_list_item.js'
 
 class PostList extends Component {
     render() {
+        console.log(this.props.posts);
+        console.log(this.props.fetching);
         return (
             <Col md={9}>
                 {this.props.posts.map((post, index) => (

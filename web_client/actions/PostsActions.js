@@ -9,10 +9,10 @@ import {SET_SELECTED_FILTERS,
         GET_FILTERS_FAILED,
         GET_SORTINGS_REQUEST,
         GET_SORTINGS_SUCCESS,
-        GET_SORTINGS_FAILED} from '../constants/posts.js'
+        GET_SORTINGS_FAILED} from '../constants/PostsConstants.js'
 import {POSTS_QUERY_STRING,
         FILTERS_QUERY_STRING,
-        SORTINGS_QUERY_STRING} from '../constants/queries.js'
+        SORTINGS_QUERY_STRING} from '../constants/QueriesConstants.js'
 
 const actionOfQueryOptions = {
     'selectedFilters': SET_SELECTED_FILTERS,
@@ -27,7 +27,7 @@ export function getFilters() {
         });
 
         try {
-            filters = fetch(FILTERS_QUERY_STRING).then(response => response.json());
+            const filters = fetch(FILTERS_QUERY_STRING).then(response => response.json());
 
             dispatch({
                 type: GET_FILTERS_SUCCESS,
@@ -50,7 +50,7 @@ export function getSortings() {
         });
 
         try {
-            sortings = fetch(SORTINGS_QUERY_STRING).then(response => response.json).results;
+            const sortings = fetch(SORTINGS_QUERY_STRING).then(response => response.json).results;
 
             dispatch({
                 type: GET_SORTINGS_SUCCESS,
@@ -72,10 +72,10 @@ export function setSelectedQueryOptions(optionName, optionValue) {
             payload: optionValue
         });
 
-        currentState = getState();
+        const currentState = getState();
 
-        queryOptions = {};
-        for (stateField in actionOfQueryOptions) {
+        let queryOptions = {};
+        for (const stateField in actionOfQueryOptions) {
             queryOptions[stateField] = stateField == optionName ? optionValue : currentState[stateField];
         }
 
@@ -83,13 +83,21 @@ export function setSelectedQueryOptions(optionName, optionValue) {
     }
 }
 
-export function getPosts(queryOptions) {
-    return (dispatch) => {
-        getPostsWithOptions(dispatch, quieryOptions);
+export function getPosts() {
+    return (dispatch, getState) => {
+        const currentState = getState();
+        let queryOptions = {};
+        for (const stateField in actionOfQueryOptions) {
+            queryOptions[stateField] = currentState[stateField];
+        }
+
+        console.log(queryOptions);
+
+        getPostsWithOptions(dispatch, queryOptions);
     }
 }
 
-function getPostsWithOptions(dispatch, quieryOptions) {
+function getPostsWithOptions(dispatch, queryOptions) {
     dispatch({
         type: GET_POSTS_REQUEST,
         payload: queryOptions

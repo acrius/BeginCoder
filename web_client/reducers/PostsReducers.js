@@ -10,7 +10,7 @@ import {GET_POSTS_REQUEST,
         GET_SORTINGS_FAILED,
         SET_SELECTED_PAGE,
         SET_SELECTED_SORTING,
-        SET_SELECTED_FILTERS} from '../constants/posts.js'
+        SET_SELECTED_FILTERS} from '../constants/PostsConstants.js'
 
 const postsInitialState = {
     posts: [],

@@ -4,9 +4,9 @@ import {Router, Route, IndexRoute, browserHistory} from 'react-router'
 import {createStore} from 'redux'
 import {Provider} from 'react-redux'
 
-import Posts from './containers/posts.js'
+import Posts from './containers/PostsContainer.js'
 import {App} from './components'
-import configure_store from './store/configure_store.js'
+import configure_store from './store/configureStore.js'
 
 const store = configure_store();
 
