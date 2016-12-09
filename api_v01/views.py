@@ -46,4 +46,10 @@ class PostSortingList(ListAPIView):
 def get_tags(request):
     tags = PostTag.objects.extra(where=['"using" > 0',], order_by=['-using',])
     tags = [{'name': tag.name, 'count': tag.using} for tag in tags]
+    tags = {
+        'results': tags,
+        'count': len(tags),
+        'next': None,
+        'previous': None
+    }
     return JsonResponse(tags, safe=False)

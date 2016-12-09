@@ -18,7 +18,7 @@ class Posts extends Component {
         return (
             <Grid>
                 <Row>
-                    <PostList posts={postsData.posts} fetching={this.props.postsFetching} />
+                    <PostList posts={postsData.posts} fetching={postsData.postsFetching} />
                 </Row>
             </Grid>
         );

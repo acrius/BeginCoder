@@ -1,115 +1,35 @@
-import {SET_SELECTED_FILTERS,
-        SET_SELECTED_SORTING,
-        SET_SELECTED_PAGE,
-        GET_POSTS_REQUEST,
+import {GET_POSTS_REQUEST,
         GET_POSTS_SUCCESS,
-        GET_POSTS_FAILED,
-        GET_FILTERS_REQUEST,
-        GET_FILTERS_SUCCESS,
-        GET_FILTERS_FAILED,
-        GET_SORTINGS_REQUEST,
-        GET_SORTINGS_SUCCESS,
-        GET_SORTINGS_FAILED} from '../constants/PostsConstants.js'
-import {POSTS_QUERY_STRING,
-        FILTERS_QUERY_STRING,
-        SORTINGS_QUERY_STRING} from '../constants/QueriesConstants.js'
-
-const actionOfQueryOptions = {
-    'selectedFilters': SET_SELECTED_FILTERS,
-    'selectedSorting': SET_SELECTED_SORTING,
-    'selectedPage': SET_SELECTED_PAGE
-};
-
-export function getFilters() {
-    return (dispatch) => {
-        dispatch({
-            type: GET_FILTERS_REQUEST
-        });
-
-        try {
-            const filters = fetch(FILTERS_QUERY_STRING).then(response => response.json());
-
-            dispatch({
-                type: GET_FILTERS_SUCCESS,
-                payload: filters
-            });
-
-        } catch(e) {
-            dispatch({
-                type: GET_FILTERS_FAILED,
-                payload:new Error(e)
-            });
-        }
-    }
-}
-
-export function getSortings() {
-    return (dispatch) => {
-        dispatch({
-            type: GET_SORTINGS_REQUEST
-        });
-
-        try {
-            const sortings = fetch(SORTINGS_QUERY_STRING).then(response => response.json).results;
-
-            dispatch({
-                type: GET_SORTINGS_SUCCESS,
-                payload: sortings
-            });
-        } catch(e) {
-            dispatch({
-                type: GET_SORTINGS_FAILED,
-                payload: new Error(e)
-            });
-        }
-    }
-}
-
-export function setSelectedQueryOptions(optionName, optionValue) {
-    return (dispatch, getState) => {
-        dispatch({
-            type: actionOfQueryOptions[optionName],
-            payload: optionValue
-        });
-
-        const currentState = getState();
-
-        let queryOptions = {};
-        for (const stateField in actionOfQueryOptions) {
-            queryOptions[stateField] = stateField == optionName ? optionValue : currentState[stateField];
-        }
-
-        getPostsWithOptions(dispatch, quieryOptions);
-    }
-}
+        GET_POSTS_FAILED} from '../constants/posts/PostsConstants.js'
+import {POSTS_QUERY_STRING} from '../constants/QueriesConstants.js'
 
 export function getPosts() {
     return (dispatch, getState) => {
-        const currentState = getState();
-        let queryOptions = {};
-        for (const stateField in actionOfQueryOptions) {
-            queryOptions[stateField] = currentState[stateField];
-        }
-
-        console.log(queryOptions);
-
-        getPostsWithOptions(dispatch, queryOptions);
+        getPostsWithOptions(dispatch, getStateOfQueryOptions(getState()));
     }
 }
 
-function getPostsWithOptions(dispatch, queryOptions) {
+export function getStateOfQueryOptions(state) {
+    return {
+        selectedSorting: state.sortings.selectedSorting,
+        selectedFilters: state.filters.selectedFilters,
+        selectedPage: state.pages.selectedPage
+    };
+}
+
+export function getPostsWithOptions(dispatch, queryOptions) {
     dispatch({
         type: GET_POSTS_REQUEST,
         payload: queryOptions
     });
 
     try {
-        data = loadPosts(queryOptions);
-
-        dispatch({
-            type: GET_POSTS_SUCCESS,
-            payload: data
-        });
+        loadPosts(queryOptions).then( postsData =>
+                                    dispatch({
+                                        type: GET_POSTS_SUCCESS,
+                                        payload: postsData
+                                    })
+                                );
     } catch(e) {
         dispatch({
             type: GET_POSTS_FAILED,
@@ -126,7 +46,7 @@ function loadPosts(queryOptions) {
 function getOptionsString(queryOptions) {
     const pageString = queryOptions.selectedPage ? '?page=' + queryOptions.selectedPage : '?';
     const sortString = 'sort=' + queryOptions.sorting;
-    const filterStrings = queryOptions.length > 0 ? '&filter=[' + queryOptions.filters.join(',') + ']' : '';
+    const filtersString = queryOptions.length > 0 ? '&filter=[' + queryOptions.filters.join(',') + ']' : '';
 
-    return pageString + sortString + filterString;
+    return pageString + sortString + filtersString;
 }
