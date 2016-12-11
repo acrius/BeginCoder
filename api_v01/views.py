@@ -16,13 +16,17 @@ class PostList(ListCreateAPIView):
     serializer_class = PostSerializer
 
     def get(self, request):
-        oreder_by = request.GET.get('sort') or '-date'
-        filter_by = request.GET.get('filter')
+        oreder_by = self.validate_sorting(request.GET.get('sorting'))
+        filter_by = request.GET.get('filters')
         filter_by = filter_by.strip('[]').split(',') if filter_by else None
         posts = Post.objects.all().filter(tags__name__in=filter_by) if filter_by\
                 else Post.objects.all().order_by(oreder_by)
         posts_serializer = PaginatedCourseSerializer(posts, request, POSTS_PER_PAGE)
         return Response(posts_serializer.data)
+
+    @staticmethod
+    def validate_sorting(sorting):
+        return sorting if sorting and PostSorting.objects.extra(where=['"sorting_string" LIKE %s'], params=[sorting,]) else '-date'
 
     @permission_classes((IsAdminUser,))
     def post(self, request, format=None):

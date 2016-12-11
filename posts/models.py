@@ -19,6 +19,7 @@ class Post(models.Model):
     title = models.CharField(max_length=255, unique=True, default='Title of post.')
     date = models.DateTimeField(default=timezone.now)
     content = models.TextField(null=True, blank=True)
+    preview = models.TextField(max_length=1500 , null=True, blank=True)
     views_count = models.IntegerField(default=0)
     useful = models.IntegerField(default=0)
     author = models.ForeignKey(User)

@@ -4,7 +4,9 @@ from taggit_serializer.serializers import TaggitSerializer, TagListSerializerFie
 
 from posts.models import Post, PostSorting
 
+
 class PaginatedCourseSerializer:
+
     def __init__(self, courses, request, per_page):
         paginator = Paginator(courses, per_page)
         page = request.GET.get('page')
@@ -22,12 +24,14 @@ class PaginatedCourseSerializer:
         self.data = {'count': count, 'previous': previous,
                      'next': next, 'results': serializer.data}
 
+
 class PostSerializer(TaggitSerializer, ModelSerializer):
     tags = TagListSerializerField()
 
     class Meta:
         model = Post
-        fields = ['id', 'title', 'date', 'content', 'views_count', 'tags']
+        fields = ['id', 'title', 'date', 'content', 'preview',
+                  'views_count', 'tags', 'author', 'useful']
 
     def create(self, validated_data):
         title = validated_data.get('title')
@@ -35,9 +39,12 @@ class PostSerializer(TaggitSerializer, ModelSerializer):
         tags = validated_data.get('tags')
         author = self.context.get('user')
         content = validated_data.get('content')
-        return Post.objects.create(title=title, date=date, tags=tags, author=author, content=content, views_count=0)
+        preview = validated_data.get('preview')
+        return Post.objects.create(title=title, date=date, tags=tags, author=author, content=content, preview=preview, views_count=0, useful=0)
+
 
 class PostSortingSerializer(ModelSerializer):
+
     class Meta:
         model = PostSorting
         fields = ['title', 'sorting_string']
