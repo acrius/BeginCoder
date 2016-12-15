@@ -41,6 +41,7 @@ class Post extends Component {
                     <h2>{post.title}</h2>
                 </Row>
                 <Row dangerouslySetInnerHTML={{__html: content}}></Row>
+                <PostVKComments />
             </Col>
         );
     }
