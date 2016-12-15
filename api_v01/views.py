@@ -19,7 +19,7 @@ class PostList(ListCreateAPIView):
         oreder_by = self.validate_sorting(request.GET.get('sorting'))
         filter_by = request.GET.get('filters')
         filter_by = filter_by.strip('[]').split(',') if filter_by else None
-        posts = Post.objects.all().filter(tags__name__in=filter_by) if filter_by\
+        posts = Post.objects.all().filter(tags__name__in=filter_by).distinct() if filter_by\
                 else Post.objects.all().order_by(oreder_by)
         posts_serializer = PaginatedCourseSerializer(posts, request, POSTS_PER_PAGE)
         return Response(posts_serializer.data)
