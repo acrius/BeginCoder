@@ -4,5 +4,22 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lobster">
+<script src="https://vk.com/js/api/openapi.js?136" type="text/javascript"></script>
 <div id="application"></div>
+<div id="vk_api_transport"></div>
+<script type="text/javascript">
+  window.vkAsyncInit = function() {
+    VK.init({
+      apiId: 5776383
+    });
+  };
+
+  setTimeout(function() {
+    var el = document.createElement("script");
+    el.type = "text/javascript";
+    el.src = "https://vk.com/js/api/openapi.js?136";
+    el.async = true;
+    document.getElementById("vk_api_transport").appendChild(el);
+  }, 0);
+</script>
 <script type="text/javascript" src="{% static "web_client.js" %}"></script>
