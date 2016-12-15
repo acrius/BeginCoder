@@ -64636,19 +64636,17 @@
 	    }
 
 	    (0, _createClass3.default)(PostVKComments, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            VK.Widgets.Comments("vk_comments", { limit: 10, width: "665", attach: "*" });
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
 	                _reactBootstrap.Row,
 	                null,
-	                _react2.default.createElement('div', { id: 'vk_comments' }),
-	                _react2.default.createElement(
-	                    'script',
-	                    { type: 'text/javascript' },
-	                    'VK.Widgets.Comments("vk_comments", ',
-	                    { limit: 10, width: "665", attach: "*" },
-	                    ');'
-	                )
+	                _react2.default.createElement('div', { id: 'vk_comments' })
 	            );
 	        }
 	    }]);

@@ -19,13 +19,13 @@ class PostFooter extends Component {
 }
 
 class PostVKComments extends Component {
+    componentDidMount() {
+        VK.Widgets.Comments("vk_comments", {limit: 10, width: "665", attach: "*"});
+    }
     render() {
         return (
             <Row>
                 <div id="vk_comments"></div>
-                <script type="text/javascript">
-                VK.Widgets.Comments("vk_comments", {{limit: 10, width: "665", attach: "*"}});
-                </script>
             </Row>
         );
     }

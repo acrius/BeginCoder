@@ -3,6 +3,6 @@ node_modules
 db.sqlite3
 __pycache__
 settings.py
-static
+static/posts
 media
 settings.py
