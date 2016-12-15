@@ -4,7 +4,7 @@ var webpack = require('webpack');
 module.exports = {
     entry: './web_client/index.js',
     output: {
-        path: `${__dirname}/main/static`,
+        path: `${__dirname}/static`,
         filename: 'web_client.js'
     },
     resolve: {
