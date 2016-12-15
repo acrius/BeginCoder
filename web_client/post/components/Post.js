@@ -18,6 +18,19 @@ class PostFooter extends Component {
     }
 }
 
+class PostVKComments extends Component {
+    render() {
+        return (
+            <Row>
+                <div id="vk_comments"></div>
+                <script type="text/javascript">
+                VK.Widgets.Comments("vk_comments", {limit: 10, width: "665", attach: "*"});
+                </script>
+            </Row>
+        );
+    }
+}
+
 class Post extends Component {
     render() {
         const post = this.props.post;
