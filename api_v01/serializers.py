@@ -6,7 +6,6 @@ from posts.models import Post, PostSorting
 
 
 class PaginatedCourseSerializer:
-
     def __init__(self, courses, request, per_page):
         paginator = Paginator(courses, per_page)
         page = request.GET.get('page')
@@ -53,7 +52,6 @@ class PostSerializer(TaggitSerializer, ModelSerializer):
 
 
 class PostSortingSerializer(ModelSerializer):
-
     class Meta:
         model = PostSorting
         fields = ['title', 'sorting_string']

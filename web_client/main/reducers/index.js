@@ -7,4 +7,7 @@ import pages from '../../posts/reducers/PagesReducer.js'
 
 import post from '../../post/reducers/PostReducer.js'
 
-export default combineReducers({posts, sortings, filters, pages, post});
+import {loginReducer} from '../../user/reducers/UserReducers.js'
+
+
+export default combineReducers({posts, sortings, filters, pages, post, loginReducer});

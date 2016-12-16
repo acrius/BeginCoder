@@ -6,7 +6,7 @@ import {Provider} from 'react-redux'
 
 import PostsPage from './posts/containers'
 import PostPage from './post/containers'
-import {App} from './main/components'
+import App from './main/containers/App.js'
 import configure_store from './main/store/configureStore.js'
 
 const store = configure_store();
