@@ -20,9 +20,18 @@ class PaginatedCourseSerializer:
 
         previous = None if not courses.has_previous() else courses.previous_page_number()
         next = None if not courses.has_next() else courses.next_page_number()
-        serializer = PostSerializer(courses, many=True)
+        serializer = PostListSerializer(courses, many=True)
         self.data = {'count': count, 'previous': previous,
                      'next': next, 'results': serializer.data}
+
+
+class PostListSerializer(TaggitSerializer, ModelSerializer):
+    tags = TagListSerializerField()
+
+    class Meta:
+        model = Post
+        fields = ['id', 'title', 'date', 'preview',
+                  'views_count', 'tags', 'author', 'useful']
 
 
 class PostSerializer(TaggitSerializer, ModelSerializer):
