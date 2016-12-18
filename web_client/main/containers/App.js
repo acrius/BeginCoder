@@ -6,11 +6,9 @@ import {connect} from 'react-redux'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
-import * as UserActions from '../../user/actions/UserActions.js'
-
 import './style.styl'
 
-class App extends Component {
+export default class App extends Component {
     render() {
         return (
             <div className='main'>
@@ -22,17 +20,3 @@ class App extends Component {
         );
     }
 }
-
-function mapStateToProps(state) {
-    return {
-        user: state.user
-    };
-}
-
-function mapDispatchToProps(dispatch) [
-    return {
-        userActions: bindActionCreators(UserActions, dispatch);
-    };
-]
-
-export default connect(mapStateToProps,  mapDispatchToProps)(App)

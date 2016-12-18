@@ -5,10 +5,11 @@ import {LOGIN_REQUEST,
 const userInitialState = {
         user: null,
         userFetching: false,
-        userError: false
+        userError: false,
+        isAuthentificated: false
 };
 
-export loginReducer(state = userInitialState, action) => {
+export function loginReducer(state = userInitialState, action) {
     let newState = {};
     switch (action.type) {
         case LOGIN_REQUEST:
@@ -29,7 +30,7 @@ export loginReducer(state = userInitialState, action) => {
                 userFetching: false,
                 userError: true
             };
-        break;
+            break;
     }
     return {
         ...state,

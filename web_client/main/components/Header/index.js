@@ -6,11 +6,14 @@ import Navigation from './Navigation.js'
 
 import './styles/header.styl'
 
+import UserPanel from '../../../user/containers'
+
 class Header extends Component {
     render() {
         return (
             <Navbar collapseOnSelect className='header'>
                 <Logo />
+                <UserPanel />
             </Navbar>
         );
     }
