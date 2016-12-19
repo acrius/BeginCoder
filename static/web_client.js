@@ -65235,11 +65235,11 @@
 
 	function getLoginStatus() {
 	    return function (dispatch, getState) {
-	        VK.Auth.getLoginStatus(function (response) {
-	            if (response.status === _UserConstants.VK_CONNECTED) {
+	        VK.Auth.getLoginStatus(function (request) {
+	            if (request.status === _UserConstants.VK_CONNECTED) {
 	                dispatch({
 	                    type: _UserConstants.LOGIN_SUCCESS,
-	                    payload: response.session.user,
+	                    payload: request.session.user,
 	                    error: false
 	                });
 	                updateUser(getState);
