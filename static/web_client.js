@@ -65166,8 +65166,7 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var isAuthentificated = this.props.isAuthentificated;
-	            return isAuthentificated ? _react2.default.createElement(
+	            return this.props.isAuthentificated ? _react2.default.createElement(
 	                'span',
 	                null,
 	                this.props.user.first_name + ' ' + this.props.user.last_name
