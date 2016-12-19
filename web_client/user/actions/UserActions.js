@@ -33,7 +33,9 @@ export function getLoginStatus() {
     return (dispatch, getState) => {
         VK.Auth.getLoginStatus((request) => {
             if (request.status === VK_CONNECTED) {
-                console.log(request);
+                VK.Api.call('users.get', { uid: request.session.mid }, (urequest) => {
+                    console.log(urequest);
+                });
                 dispatch({
                     type: LOGIN_SUCCESS,
                     payload: request.session.user,

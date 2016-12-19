@@ -65237,7 +65237,9 @@
 	    return function (dispatch, getState) {
 	        VK.Auth.getLoginStatus(function (request) {
 	            if (request.status === _UserConstants.VK_CONNECTED) {
-	                console.log(request);
+	                VK.Api.call('users.get', { uid: request.session.mid }, function (urequest) {
+	                    console.log(urequest);
+	                });
 	                dispatch({
 	                    type: _UserConstants.LOGIN_SUCCESS,
 	                    payload: request.session.user,
