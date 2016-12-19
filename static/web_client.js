@@ -66646,19 +66646,22 @@
 	        case _UserConstants.LOGIN_REQUEST:
 	            newState = {
 	                userFetching: true,
-	                error: false
+	                isAuthentificated: false,
+	                userError: false
 	            };
 	            break;
 	        case _UserConstants.LOGIN_SUCCESS:
 	            newState = {
 	                user: action.payload,
 	                userFetching: false,
-	                error: false
+	                isAuthentificated: true,
+	                userError: false
 	            };
 	            break;
 	        case _UserConstants.LOGIN_ERROR:
 	            newState = {
 	                userFetching: false,
+	                isAuthentificated: false,
 	                userError: true
 	            };
 	            break;

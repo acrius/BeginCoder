@@ -15,19 +15,22 @@ export default (state = userInitialState, action) => {
         case LOGIN_REQUEST:
             newState = {
                 userFetching: true,
-                error: false
+                isAuthentificated: false,
+                userError: false
             };
             break;
         case LOGIN_SUCCESS:
             newState = {
                 user: action.payload,
                 userFetching: false,
-                error: false
+                isAuthentificated: true,
+                userError: false
             };
             break;
         case LOGIN_ERROR:
             newState = {
                 userFetching: false,
+                isAuthentificated: false,
                 userError: true
             };
             break;
