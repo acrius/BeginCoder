@@ -65249,7 +65249,7 @@
 	}
 
 	function updateUser(getState) {
-	    state = getState();
+	    var state = getState();
 	}
 
 /***/ },

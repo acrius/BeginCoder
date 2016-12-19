@@ -45,5 +45,5 @@ export function getLoginStatus() {
 }
 
 function updateUser(getState) {
-    state = getState();
+    const state = getState();
 }
