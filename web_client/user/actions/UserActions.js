@@ -5,7 +5,7 @@ import {LOGIN_REQUEST,
 
 
 export function login() {
-    return (dispatch) => {
+    return (dispatch, getState) => {
         dispatch({
             type: LOGIN_REQUEST,
             error: false
@@ -17,6 +17,7 @@ export function login() {
                     payload: request.session.user,
                     error: false,
                 });
+                updateUser(getState);
             } else {
                 dispatch({
                     type: LOGIN_ERROR,
@@ -29,15 +30,21 @@ export function login() {
 }
 
 export function getLoginStatus() {
-    return (dispatch) => {
+    return (dispatch, getState) => {
         VK.Auth.getLoginStatus((session, status) => {
+            console.log(status);
             if (status === VK_CONNECTED) {
                 dispatch({
                     type: LOGIN_SUCCESS,
                     payload: session.user,
                     error: false,
                 });
+                updateUser(getState);
             }
         });
     }
+}
+
+function updateUser(getState) {
+    state = getState();
 }

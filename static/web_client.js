@@ -65209,7 +65209,7 @@
 	var _UserConstants = __webpack_require__(666);
 
 	function login() {
-	    return function (dispatch) {
+	    return function (dispatch, getState) {
 	        dispatch({
 	            type: _UserConstants.LOGIN_REQUEST,
 	            error: false
@@ -65221,6 +65221,7 @@
 	                    payload: request.session.user,
 	                    error: false
 	                });
+	                updateUser(getState);
 	            } else {
 	                dispatch({
 	                    type: _UserConstants.LOGIN_ERROR,
@@ -65233,17 +65234,23 @@
 	}
 
 	function getLoginStatus() {
-	    return function (dispatch) {
+	    return function (dispatch, getState) {
 	        VK.Auth.getLoginStatus(function (session, status) {
+	            console.log(status);
 	            if (status === _UserConstants.VK_CONNECTED) {
 	                dispatch({
 	                    type: _UserConstants.LOGIN_SUCCESS,
 	                    payload: session.user,
 	                    error: false
 	                });
+	                updateUser(getState);
 	            }
 	        });
 	    };
+	}
+
+	function updateUser(getState) {
+	    state = getState();
 	}
 
 /***/ },
