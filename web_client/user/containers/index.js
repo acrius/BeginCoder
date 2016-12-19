@@ -15,16 +15,13 @@ class UserPanel extends Component {
     }
 
     render() {
-        return this.props.isAuthentificated ? (<span>{this.props.user.first_name + ' ' + this.props.user.last_name}</span>) : (<Button onClick={this.login}>Войти</Button>);
+        return this.props.user.isAuthentificated ? (<span>{this.props.user.user.first_name + ' ' + this.props.user.user.last_name}</span>) : (<Button onClick={this.login}>Войти</Button>);
     }
 }
 
 function mapStateToProps(state) {
     return {
-        user: state.user,
-        userFetching: state.userFetching,
-        userError: state.userError,
-        isAuthentificated: state.isAuthentificated
+        user: state.user
     };
 }
 

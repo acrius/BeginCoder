@@ -65166,10 +65166,10 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            return this.props.isAuthentificated ? _react2.default.createElement(
+	            return this.props.user.isAuthentificated ? _react2.default.createElement(
 	                'span',
 	                null,
-	                this.props.user.first_name + ' ' + this.props.user.last_name
+	                this.props.user.user.first_name + ' ' + this.props.user.user.last_name
 	            ) : _react2.default.createElement(
 	                _reactBootstrap.Button,
 	                { onClick: this.login },
@@ -65182,10 +65182,7 @@
 
 	function mapStateToProps(state) {
 	    return {
-	        user: state.user,
-	        userFetching: state.userFetching,
-	        userError: state.userError,
-	        isAuthentificated: state.isAuthentificated
+	        user: state.user
 	    };
 	}
 
