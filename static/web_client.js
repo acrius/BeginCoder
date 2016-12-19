@@ -65240,12 +65240,6 @@
 	                VK.Api.call('users.get', { uid: request.session.mid }, function (urequest) {
 	                    console.log(urequest);
 	                });
-	                dispatch({
-	                    type: _UserConstants.LOGIN_SUCCESS,
-	                    payload: request.session.user,
-	                    error: false
-	                });
-	                updateUser(getState);
 	            }
 	        });
 	    };
