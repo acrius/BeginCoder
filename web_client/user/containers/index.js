@@ -6,7 +6,7 @@ import {Button} from 'react-bootstrap'
 import * as userActions from '../actions/UserActions.js'
 
 class UserPanel extends Component {
-    login(e) {
+    login = (e) => {
         this.props.userActions.login();
     }
 
