@@ -16,7 +16,7 @@ class UserPanel extends Component {
 
     render() {
         const isAuthentificated = this.props.isAuthentificated;
-        return isAuthentificated ? (<Button onClick={this.login}>Войти</Button>) : (<span>{this.props.user.first_name + ' ' + this.props.user.last_name}</span>);
+        return isAuthentificated ? (<span>{this.props.user.first_name + ' ' + this.props.user.last_name}</span>) : (<Button onClick={this.login}>Войти</Button>);
     }
 }
 

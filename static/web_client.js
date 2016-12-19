@@ -65168,13 +65168,13 @@
 	        value: function render() {
 	            var isAuthentificated = this.props.isAuthentificated;
 	            return isAuthentificated ? _react2.default.createElement(
-	                _reactBootstrap.Button,
-	                { onClick: this.login },
-	                '\u0412\u043E\u0439\u0442\u0438'
-	            ) : _react2.default.createElement(
 	                'span',
 	                null,
 	                this.props.user.first_name + ' ' + this.props.user.last_name
+	            ) : _react2.default.createElement(
+	                _reactBootstrap.Button,
+	                { onClick: this.login },
+	                '\u0412\u043E\u0439\u0442\u0438'
 	            );
 	        }
 	    }]);
