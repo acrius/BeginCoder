@@ -31,12 +31,11 @@ export function login() {
 
 export function getLoginStatus() {
     return (dispatch, getState) => {
-        VK.Auth.getLoginStatus((session, status) => {
-            console.log(status);
-            if (status === VK_CONNECTED) {
+        VK.Auth.getLoginStatus((response) => {
+            if (response.status === VK_CONNECTED) {
                 dispatch({
                     type: LOGIN_SUCCESS,
-                    payload: session.user,
+                    payload: response.ssion.user,
                     error: false,
                 });
                 updateUser(getState);
