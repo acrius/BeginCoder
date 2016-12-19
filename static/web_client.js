@@ -65239,7 +65239,7 @@
 	            if (response.status === _UserConstants.VK_CONNECTED) {
 	                dispatch({
 	                    type: _UserConstants.LOGIN_SUCCESS,
-	                    payload: response.ssion.user,
+	                    payload: response.session.user,
 	                    error: false
 	                });
 	                updateUser(getState);

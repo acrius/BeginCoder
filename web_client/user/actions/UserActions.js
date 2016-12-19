@@ -35,7 +35,7 @@ export function getLoginStatus() {
             if (response.status === VK_CONNECTED) {
                 dispatch({
                     type: LOGIN_SUCCESS,
-                    payload: response.ssion.user,
+                    payload: response.session.user,
                     error: false,
                 });
                 updateUser(getState);
