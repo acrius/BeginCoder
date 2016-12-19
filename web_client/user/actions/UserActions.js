@@ -28,7 +28,7 @@ export function login() {
     }
 }
 
-export getLoginStatus() {
+export function getLoginStatus() {
     return (dispatch) => {
         VK.auth.getLoginStatus((session, status) => {
             if (status === VK_CONNECTED) {
