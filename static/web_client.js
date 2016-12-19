@@ -70,7 +70,7 @@
 
 	var _App2 = _interopRequireDefault(_App);
 
-	var _configureStore = __webpack_require__(668);
+	var _configureStore = __webpack_require__(670);
 
 	var _configureStore2 = _interopRequireDefault(_configureStore);
 
@@ -64734,11 +64734,11 @@
 
 	var _Header2 = _interopRequireDefault(_Header);
 
-	var _Footer = __webpack_require__(665);
+	var _Footer = __webpack_require__(667);
 
 	var _Footer2 = _interopRequireDefault(_Footer);
 
-	__webpack_require__(666);
+	__webpack_require__(668);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -65131,7 +65131,7 @@
 
 	var _reactBootstrap = __webpack_require__(348);
 
-	var _UserActions = __webpack_require__(684);
+	var _UserActions = __webpack_require__(665);
 
 	var userActions = _interopRequireWildcard(_UserActions);
 
@@ -65207,6 +65207,72 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+	exports.login = login;
+	exports.getLoginStatus = getLoginStatus;
+
+	var _UserConstants = __webpack_require__(666);
+
+	function login() {
+	    return function (dispatch) {
+	        dispatch({
+	            type: _UserConstants.LOGIN_REQUEST,
+	            error: false
+	        });
+	        VK.Auth.login(function (request) {
+	            if (request.session) {
+	                dispatch({
+	                    type: _UserConstants.LOGIN_SUCCESS,
+	                    payload: request.session.user,
+	                    error: false
+	                });
+	            } else {
+	                dispatch({
+	                    type: _UserConstants.LOGIN_ERROR,
+	                    payload: 'Ошибка авторизации',
+	                    error: true
+	                });
+	            }
+	        });
+	    };
+	}
+
+	function getLoginStatus() {
+	    return function (dispatch) {
+	        VK.Auth.getLoginStatus(function (session, status) {
+	            if (status === _UserConstants.VK_CONNECTED) {
+	                dispatch({
+	                    type: _UserConstants.LOGIN_SUCCESS,
+	                    payload: session.user,
+	                    error: false
+	                });
+	            }
+	        });
+	    };
+	}
+
+/***/ },
+/* 666 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var LOGIN_REQUEST = exports.LOGIN_REQUEST = 'LOGIN_REQUEST';
+	var LOGIN_SUCCESS = exports.LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+	var LOGIN_ERROR = exports.LOGIN_ERROR = 'LOGIN_ERROR';
+	var VK_CONNECTED = exports.VK_CONNECTED = 'connected';
+
+/***/ },
+/* 667 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
 
 	var _getPrototypeOf = __webpack_require__(262);
 
@@ -65274,13 +65340,13 @@
 	exports.default = AppFooter;
 
 /***/ },
-/* 666 */
+/* 668 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(667);
+	var content = __webpack_require__(669);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(646)(content, {});
@@ -65300,7 +65366,7 @@
 	}
 
 /***/ },
-/* 667 */
+/* 669 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(645)();
@@ -65314,7 +65380,7 @@
 
 
 /***/ },
-/* 668 */
+/* 670 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -65325,15 +65391,15 @@
 
 	var _redux = __webpack_require__(233);
 
-	var _reduxThunk = __webpack_require__(669);
+	var _reduxThunk = __webpack_require__(671);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _reduxLogger = __webpack_require__(670);
+	var _reduxLogger = __webpack_require__(672);
 
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 
-	var _reducers = __webpack_require__(676);
+	var _reducers = __webpack_require__(678);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -65353,7 +65419,7 @@
 	};
 
 /***/ },
-/* 669 */
+/* 671 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -65381,7 +65447,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 670 */
+/* 672 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -65392,11 +65458,11 @@
 	  value: true
 	});
 
-	var _core = __webpack_require__(671);
+	var _core = __webpack_require__(673);
 
-	var _helpers = __webpack_require__(672);
+	var _helpers = __webpack_require__(674);
 
-	var _defaults = __webpack_require__(675);
+	var _defaults = __webpack_require__(677);
 
 	var _defaults2 = _interopRequireDefault(_defaults);
 
@@ -65499,7 +65565,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 671 */
+/* 673 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -65509,9 +65575,9 @@
 	});
 	exports.printBuffer = printBuffer;
 
-	var _helpers = __webpack_require__(672);
+	var _helpers = __webpack_require__(674);
 
-	var _diff = __webpack_require__(673);
+	var _diff = __webpack_require__(675);
 
 	var _diff2 = _interopRequireDefault(_diff);
 
@@ -65640,7 +65706,7 @@
 	}
 
 /***/ },
-/* 672 */
+/* 674 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -65664,7 +65730,7 @@
 	var timer = exports.timer = typeof performance !== "undefined" && performance !== null && typeof performance.now === "function" ? performance : Date;
 
 /***/ },
-/* 673 */
+/* 675 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -65674,7 +65740,7 @@
 	});
 	exports.default = diffLogger;
 
-	var _deepDiff = __webpack_require__(674);
+	var _deepDiff = __webpack_require__(676);
 
 	var _deepDiff2 = _interopRequireDefault(_deepDiff);
 
@@ -65760,7 +65826,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 674 */
+/* 676 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global) {/*!
@@ -66189,7 +66255,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 675 */
+/* 677 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -66240,7 +66306,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 676 */
+/* 678 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -66251,27 +66317,27 @@
 
 	var _redux = __webpack_require__(233);
 
-	var _PostsReducer = __webpack_require__(677);
+	var _PostsReducer = __webpack_require__(679);
 
 	var _PostsReducer2 = _interopRequireDefault(_PostsReducer);
 
-	var _SortingsReducer = __webpack_require__(678);
+	var _SortingsReducer = __webpack_require__(680);
 
 	var _SortingsReducer2 = _interopRequireDefault(_SortingsReducer);
 
-	var _FiltersReducer = __webpack_require__(679);
+	var _FiltersReducer = __webpack_require__(681);
 
 	var _FiltersReducer2 = _interopRequireDefault(_FiltersReducer);
 
-	var _PagesReducer = __webpack_require__(680);
+	var _PagesReducer = __webpack_require__(682);
 
 	var _PagesReducer2 = _interopRequireDefault(_PagesReducer);
 
-	var _PostReducer = __webpack_require__(681);
+	var _PostReducer = __webpack_require__(683);
 
 	var _PostReducer2 = _interopRequireDefault(_PostReducer);
 
-	var _UserReducers = __webpack_require__(682);
+	var _UserReducers = __webpack_require__(684);
 
 	var _UserReducers2 = _interopRequireDefault(_UserReducers);
 
@@ -66280,7 +66346,7 @@
 	exports.default = (0, _redux.combineReducers)({ posts: _PostsReducer2.default, sortings: _SortingsReducer2.default, filters: _FiltersReducer2.default, pages: _PagesReducer2.default, post: _PostReducer2.default, user: _UserReducers2.default });
 
 /***/ },
-/* 677 */
+/* 679 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -66333,7 +66399,7 @@
 	};
 
 /***/ },
-/* 678 */
+/* 680 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -66392,7 +66458,7 @@
 	};
 
 /***/ },
-/* 679 */
+/* 681 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -66451,7 +66517,7 @@
 	};
 
 /***/ },
-/* 680 */
+/* 682 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -66489,7 +66555,7 @@
 	};
 
 /***/ },
-/* 681 */
+/* 683 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -66547,7 +66613,7 @@
 	};
 
 /***/ },
-/* 682 */
+/* 684 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -66560,7 +66626,7 @@
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _UserConstants = __webpack_require__(683);
+	var _UserConstants = __webpack_require__(666);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -66599,72 +66665,6 @@
 	    }
 	    return (0, _extends3.default)({}, state, newState);
 	};
-
-/***/ },
-/* 683 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var LOGIN_REQUEST = exports.LOGIN_REQUEST = 'LOGIN_REQUEST';
-	var LOGIN_SUCCESS = exports.LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-	var LOGIN_ERROR = exports.LOGIN_ERROR = 'LOGIN_ERROR';
-	var VK_CONNECTED = exports.VK_CONNECTED = 'connected';
-
-/***/ },
-/* 684 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.login = login;
-	exports.getLoginStatus = getLoginStatus;
-
-	var _UserConstants = __webpack_require__(683);
-
-	function login() {
-	    return function (dispatch) {
-	        dispatch({
-	            type: _UserConstants.LOGIN_REQUEST,
-	            error: false
-	        });
-	        VK.Auth.login(function (request) {
-	            if (request.session) {
-	                dispatch({
-	                    type: _UserConstants.LOGIN_SUCCESS,
-	                    payload: request.session.user,
-	                    error: false
-	                });
-	            } else {
-	                dispatch({
-	                    type: _UserConstants.LOGIN_ERROR,
-	                    payload: 'Ошибка авторизации',
-	                    error: true
-	                });
-	            }
-	        });
-	    };
-	}
-
-	function getLoginStatus() {
-	    return function (dispatch) {
-	        VK.auth.getLoginStatus(function (session, status) {
-	            if (status === _UserConstants.VK_CONNECTED) {
-	                dispatch({
-	                    type: _UserConstants.LOGIN_SUCCESS,
-	                    payload: session.user,
-	                    error: false
-	                });
-	            }
-	        });
-	    };
-	}
 
 /***/ }
 /******/ ]);

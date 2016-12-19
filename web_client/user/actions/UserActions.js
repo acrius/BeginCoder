@@ -30,7 +30,7 @@ export function login() {
 
 export function getLoginStatus() {
     return (dispatch) => {
-        VK.auth.getLoginStatus((session, status) => {
+        VK.Auth.getLoginStatus((session, status) => {
             if (status === VK_CONNECTED) {
                 dispatch({
                     type: LOGIN_SUCCESS,
