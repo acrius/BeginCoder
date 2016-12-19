@@ -9,7 +9,7 @@ const userInitialState = {
         isAuthentificated: false
 };
 
-export function loginReducer(state = userInitialState, action) {
+export default (state = userInitialState, action) => {
     let newState = {};
     switch (action.type) {
         case LOGIN_REQUEST:

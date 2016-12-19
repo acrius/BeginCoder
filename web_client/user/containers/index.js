@@ -6,13 +6,20 @@ import {Button} from 'react-bootstrap'
 import * as userActions from '../actions/UserActions.js'
 
 class UserPanel extends Component {
+    componentDidMount() {
+        this.props.userActions.getLoginStatus();
+    }
+
     login = (e) => {
         this.props.userActions.login();
     }
 
     render() {
         return (
-            <Button onClick={this.login}>Войти</Button>
+            { this.props.isAuthentificated ?
+                <Button onClick={this.login}>Войти</Button>
+                : <span>{this.props.user.first_name + ' ' + this.props.user.last_name}</span>
+            }
         );
     }
 }
