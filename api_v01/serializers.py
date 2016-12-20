@@ -1,4 +1,5 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.contrib.auth.models import User
 from rest_framework.serializers import ModelSerializer
 from taggit_serializer.serializers import TaggitSerializer, TagListSerializerField
 
@@ -55,3 +56,8 @@ class PostSortingSerializer(ModelSerializer):
     class Meta:
         model = PostSorting
         fields = ['title', 'sorting_string']
+
+class UserSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'first_name', 'last_name', 'email', 'date_joined']

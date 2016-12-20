@@ -1,8 +1,9 @@
 from django.db.models import Count
 from django.http import JsonResponse
+from django.contrib.auth.models import User
 from rest_framework import status
 from rest_framework.generics import ListCreateAPIView, ListAPIView, RetrieveAPIView
-from rest_framework.decorators import permission_classes
+from rest_framework.decorators import permission_classes, api_view
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 
@@ -57,3 +58,7 @@ def get_tags(request):
         'previous': None
     }
     return JsonResponse(tags, safe=False)
+
+@api_view(['POST'])
+def updateAuth(request):
+    print(request)
