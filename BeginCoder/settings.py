@@ -25,7 +25,7 @@ SECRET_KEY = 'a3a-rkzzm2+7gm4%y1lxmj3x=my+0ygi257gfk3^a9fonsrx)='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['begincoder.ru',]
+ALLOWED_HOSTS = ['begincoder.ru','127.0.0.1']
 
 
 # Application definition
@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'BeginCoder.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'begincoder',
+        'NAME': 'BeginCoder',
         'USER': 'begincoder',
         'PASSWORD': 'codernomore42begininsea',
         'HOST': '127.0.0.1', # Set to empty string for localhost.
@@ -131,6 +131,9 @@ REST_FRAMEWORK = {
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL =  '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static")
+]
 
 TAGGIT_CASE_INSENSITIVE = True

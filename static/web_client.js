@@ -65203,13 +65203,30 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+
+	var _stringify = __webpack_require__(685);
+
+	var _stringify2 = _interopRequireDefault(_stringify);
+
 	exports.login = login;
 	exports.getLoginStatus = getLoginStatus;
 
 	var _UserConstants = __webpack_require__(666);
 
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	function login() {
 	    return function (dispatch, getState) {
+	        fetch('/api/v01/accounts/', {
+	            method: 'POST',
+	            headers: {
+	                'Content-Type': 'application/json'
+	            },
+	            body: (0, _stringify2.default)({
+	                id: 1,
+	                name: 'yeah'
+	            })
+	        });
 	        dispatch({
 	            type: _UserConstants.LOGIN_REQUEST,
 	            error: false
@@ -66666,6 +66683,22 @@
 	            break;
 	    }
 	    return (0, _extends3.default)({}, state, newState);
+	};
+
+/***/ },
+/* 685 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(686), __esModule: true };
+
+/***/ },
+/* 686 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var core  = __webpack_require__(275)
+	  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
+	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
+	  return $JSON.stringify.apply($JSON, arguments);
 	};
 
 /***/ }

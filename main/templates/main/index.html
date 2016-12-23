@@ -10,6 +10,7 @@
         <script src="https://vk.com/js/api/openapi.js" type="text/javascript"></script>
     </head>
     <body>
+        {% csrf_token %}
         <div id="vk_api_transport"></div>
         <script type="text/javascript">
           window.vkAsyncInit = function() {

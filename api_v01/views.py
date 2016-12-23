@@ -1,10 +1,12 @@
+from json import loads
 from django.db.models import Count
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from rest_framework import status
+from rest_framework.parsers import FormParser, JSONParser, MultiPartParser
 from rest_framework.generics import ListCreateAPIView, ListAPIView, RetrieveAPIView
-from rest_framework.decorators import permission_classes, api_view
-from rest_framework.permissions import IsAdminUser
+from rest_framework.decorators import permission_classes, api_view, parser_classes
+from rest_framework.permissions import IsAdminUser, AllowAny
 from rest_framework.response import Response
 
 from posts.models import Post, PostTag, PostSorting
@@ -59,6 +61,15 @@ def get_tags(request):
     }
     return JsonResponse(tags, safe=False)
 
+
 @api_view(['POST'])
-def updateAuth(request):
-    print(request)
+@permission_classes((AllowAny, ))
+@parser_classes((JSONParser, ))
+def login(request):
+    print('Request:')
+    print(request.data)
+
+    response = {
+        'status': 'ok'
+    }
+    return JsonResponse(response, safe=False)

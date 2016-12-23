@@ -6,6 +6,17 @@ import {LOGIN_REQUEST,
 
 export function login() {
     return (dispatch, getState) => {
+        fetch('/api/v01/accounts/',
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: 1,
+                name: 'yeah'
+            })
+        });
         dispatch({
             type: LOGIN_REQUEST,
             error: false
