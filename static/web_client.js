@@ -70,7 +70,7 @@
 
 	var _App2 = _interopRequireDefault(_App);
 
-	var _configureStore = __webpack_require__(670);
+	var _configureStore = __webpack_require__(672);
 
 	var _configureStore2 = _interopRequireDefault(_configureStore);
 
@@ -64734,11 +64734,11 @@
 
 	var _Header2 = _interopRequireDefault(_Header);
 
-	var _Footer = __webpack_require__(667);
+	var _Footer = __webpack_require__(669);
 
 	var _Footer2 = _interopRequireDefault(_Footer);
 
-	__webpack_require__(668);
+	__webpack_require__(670);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -64838,12 +64838,7 @@
 	            return _react2.default.createElement(
 	                _reactBootstrap.Navbar,
 	                { collapseOnSelect: true, className: 'header' },
-	                _react2.default.createElement(_Logo2.default, null),
-	                _react2.default.createElement(
-	                    _reactBootstrap.Nav,
-	                    { pullRight: true },
-	                    _react2.default.createElement(_containers2.default, null)
-	                )
+	                _react2.default.createElement(_Logo2.default, null)
 	            );
 	        }
 	    }]);
@@ -65204,14 +65199,14 @@
 	    value: true
 	});
 
-	var _stringify = __webpack_require__(685);
+	var _stringify = __webpack_require__(666);
 
 	var _stringify2 = _interopRequireDefault(_stringify);
 
 	exports.login = login;
 	exports.getLoginStatus = getLoginStatus;
 
-	var _UserConstants = __webpack_require__(666);
+	var _UserConstants = __webpack_require__(668);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -65268,6 +65263,22 @@
 
 /***/ },
 /* 666 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(667), __esModule: true };
+
+/***/ },
+/* 667 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var core  = __webpack_require__(275)
+	  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
+	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
+	  return $JSON.stringify.apply($JSON, arguments);
+	};
+
+/***/ },
+/* 668 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -65281,7 +65292,7 @@
 	var VK_CONNECTED = exports.VK_CONNECTED = 'connected';
 
 /***/ },
-/* 667 */
+/* 669 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -65356,13 +65367,13 @@
 	exports.default = AppFooter;
 
 /***/ },
-/* 668 */
+/* 670 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(669);
+	var content = __webpack_require__(671);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(646)(content, {});
@@ -65382,7 +65393,7 @@
 	}
 
 /***/ },
-/* 669 */
+/* 671 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(645)();
@@ -65396,7 +65407,7 @@
 
 
 /***/ },
-/* 670 */
+/* 672 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -65407,15 +65418,15 @@
 
 	var _redux = __webpack_require__(233);
 
-	var _reduxThunk = __webpack_require__(671);
+	var _reduxThunk = __webpack_require__(673);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _reduxLogger = __webpack_require__(672);
+	var _reduxLogger = __webpack_require__(674);
 
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 
-	var _reducers = __webpack_require__(678);
+	var _reducers = __webpack_require__(680);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -65435,7 +65446,7 @@
 	};
 
 /***/ },
-/* 671 */
+/* 673 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -65463,7 +65474,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 672 */
+/* 674 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -65474,11 +65485,11 @@
 	  value: true
 	});
 
-	var _core = __webpack_require__(673);
+	var _core = __webpack_require__(675);
 
-	var _helpers = __webpack_require__(674);
+	var _helpers = __webpack_require__(676);
 
-	var _defaults = __webpack_require__(677);
+	var _defaults = __webpack_require__(679);
 
 	var _defaults2 = _interopRequireDefault(_defaults);
 
@@ -65581,7 +65592,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 673 */
+/* 675 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -65591,9 +65602,9 @@
 	});
 	exports.printBuffer = printBuffer;
 
-	var _helpers = __webpack_require__(674);
+	var _helpers = __webpack_require__(676);
 
-	var _diff = __webpack_require__(675);
+	var _diff = __webpack_require__(677);
 
 	var _diff2 = _interopRequireDefault(_diff);
 
@@ -65722,7 +65733,7 @@
 	}
 
 /***/ },
-/* 674 */
+/* 676 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -65746,7 +65757,7 @@
 	var timer = exports.timer = typeof performance !== "undefined" && performance !== null && typeof performance.now === "function" ? performance : Date;
 
 /***/ },
-/* 675 */
+/* 677 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -65756,7 +65767,7 @@
 	});
 	exports.default = diffLogger;
 
-	var _deepDiff = __webpack_require__(676);
+	var _deepDiff = __webpack_require__(678);
 
 	var _deepDiff2 = _interopRequireDefault(_deepDiff);
 
@@ -65842,7 +65853,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 676 */
+/* 678 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global) {/*!
@@ -66271,7 +66282,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 677 */
+/* 679 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -66322,7 +66333,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 678 */
+/* 680 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -66333,27 +66344,27 @@
 
 	var _redux = __webpack_require__(233);
 
-	var _PostsReducer = __webpack_require__(679);
+	var _PostsReducer = __webpack_require__(681);
 
 	var _PostsReducer2 = _interopRequireDefault(_PostsReducer);
 
-	var _SortingsReducer = __webpack_require__(680);
+	var _SortingsReducer = __webpack_require__(682);
 
 	var _SortingsReducer2 = _interopRequireDefault(_SortingsReducer);
 
-	var _FiltersReducer = __webpack_require__(681);
+	var _FiltersReducer = __webpack_require__(683);
 
 	var _FiltersReducer2 = _interopRequireDefault(_FiltersReducer);
 
-	var _PagesReducer = __webpack_require__(682);
+	var _PagesReducer = __webpack_require__(684);
 
 	var _PagesReducer2 = _interopRequireDefault(_PagesReducer);
 
-	var _PostReducer = __webpack_require__(683);
+	var _PostReducer = __webpack_require__(685);
 
 	var _PostReducer2 = _interopRequireDefault(_PostReducer);
 
-	var _UserReducers = __webpack_require__(684);
+	var _UserReducers = __webpack_require__(686);
 
 	var _UserReducers2 = _interopRequireDefault(_UserReducers);
 
@@ -66362,7 +66373,7 @@
 	exports.default = (0, _redux.combineReducers)({ posts: _PostsReducer2.default, sortings: _SortingsReducer2.default, filters: _FiltersReducer2.default, pages: _PagesReducer2.default, post: _PostReducer2.default, user: _UserReducers2.default });
 
 /***/ },
-/* 679 */
+/* 681 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -66415,7 +66426,7 @@
 	};
 
 /***/ },
-/* 680 */
+/* 682 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -66474,7 +66485,7 @@
 	};
 
 /***/ },
-/* 681 */
+/* 683 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -66533,7 +66544,7 @@
 	};
 
 /***/ },
-/* 682 */
+/* 684 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -66571,7 +66582,7 @@
 	};
 
 /***/ },
-/* 683 */
+/* 685 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -66629,7 +66640,7 @@
 	};
 
 /***/ },
-/* 684 */
+/* 686 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -66642,7 +66653,7 @@
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _UserConstants = __webpack_require__(666);
+	var _UserConstants = __webpack_require__(668);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -66683,22 +66694,6 @@
 	            break;
 	    }
 	    return (0, _extends3.default)({}, state, newState);
-	};
-
-/***/ },
-/* 685 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(686), __esModule: true };
-
-/***/ },
-/* 686 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var core  = __webpack_require__(275)
-	  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
-	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
-	  return $JSON.stringify.apply($JSON, arguments);
 	};
 
 /***/ }

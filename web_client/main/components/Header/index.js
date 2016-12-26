@@ -13,9 +13,9 @@ class Header extends Component {
         return (
             <Navbar collapseOnSelect className='header'>
                 <Logo />
-                <Nav pullRight>
+                {/* <Nav pullRight>
                     <UserPanel />
-                </Nav>
+                </Nav> */}
             </Navbar>
         );
     }
