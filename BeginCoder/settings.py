@@ -136,4 +136,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
 
+#Taggit
 TAGGIT_CASE_INSENSITIVE = True
+
+#VK
+VK_SECRET_KEY = 0
