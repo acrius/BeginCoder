@@ -10,7 +10,7 @@ from rest_framework.permissions import IsAdminUser, AllowAny
 from rest_framework.response import Response
 
 from posts.models import Post, PostTag, PostSorting
-from api_v01.serializers import PostSerializer, PaginatedCourseSerializer, PostSortingSerializer
+from posts.serializers import PostSerializer, PaginatedPostsSerializer, PostSortingSerializer
 
 POSTS_PER_PAGE = 7
 
